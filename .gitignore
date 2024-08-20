@@ -2,7 +2,7 @@
 
 env/
 frontend/node_modules/
-backend/
+
 
 # dependencies
 /node_modules
