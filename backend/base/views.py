@@ -50,16 +50,17 @@ def registerUser(request):
 @permission_classes([IsAuthenticated])
 def updateUserProfile(request):
     user= request.user
-    serializer = UserSerializerWithToken(user,many= False)
     data = request.data
     user.first_name = data['name']
-    user.usernames = data['email']
+    user.username = data['email']
     user.email = data['email']
     
-    if data['password'] !=' ':
+    print("Cdscsdcdscscsd")
+    if "password" in data and data['password'] !=' ':
         user.password = make_password(data['password'])
     
     user.save()
+    serializer = UserSerializerWithToken(user,many= False)
     return Response(serializer.data)
 
 @api_view(['GET'])
