@@ -27,8 +27,8 @@ function CartPage(){
         }
         const checkoutHandler = ()=>{
             // Navigate to checkout page
-            dispatch(addToCart(id,qty))
-            navigate('/login?redirect=shipping')
+            // dispatch(addToCart(id,qty))
+            navigate('/shipping')
         }
         return (
             <Row>
@@ -80,7 +80,7 @@ function CartPage(){
                     <Card>
                         <ListGroup variant='flush'>
                             <ListGroup.Item>
-                                <h2>SubTotal ({cartItems.reduce((acc,item)=>acc+item.qty,0)}) items</h2>
+                                <h2>SubTotal ({Number(cartItems.reduce((acc,item)=>acc+Number(item.qty),0))}) items</h2>
                                 ${cartItems.reduce((acc,item)=>acc+item.qty*item.price,0).toFixed(2)}
                             </ListGroup.Item>
                             <ListGroup.Item>

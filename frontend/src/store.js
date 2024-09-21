@@ -4,6 +4,7 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 import { productListReducer, productDetailsReducer } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userLoginReducer,userRegisterReducer,userDatailsReducer,userUpdateReducer } from './reducers/UserReducers';
+import { orderCreateReducer } from './reducers/orderReducers';
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
@@ -11,7 +12,8 @@ const reducer = combineReducers({
     userLogin : userLoginReducer,
     userRegister : userRegisterReducer,
     userDetails:userDatailsReducer,
-    userUpdateProfile:userUpdateReducer// Add the cart reducer to the combined reducers
+    userUpdateProfile:userUpdateReducer,
+    orderCreate: orderCreateReducer// Add the cart reducer to the combined reducers
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems')
@@ -20,9 +22,13 @@ const cartItemsFromLocalStorage = localStorage.getItem('cartItems')
  const userInfoFromLocalStorage = localStorage.getItem('userInfo')
  ? JSON.parse(localStorage.getItem('userInfo')):null
 
+ const shippingAddressFromLocalStorage = localStorage.getItem('shippingAddress')
+ ? JSON.parse(localStorage.getItem('shippingAddress')):null
 const initialState = {
-    cart:{cartItems:cartItemsFromLocalStorage},
-    user:{userInfo:userInfoFromLocalStorage}
+    cart:{
+        cartItems:cartItemsFromLocalStorage,
+        shippingAddress:shippingAddressFromLocalStorage}, 
+    user:{userInfo:userInfoFromLocalStorage},
 };
 
 // Apply the middleware
